@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>simple swipe events test</title>
+    <style>
+        div {
+            width:200px;
+            height:200px;
+            background-color:grey;
+        }
+        #there {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="here"></div>
+    <div id="there"></div>
+    <script src="src/swiper.js"></script>
+    <script>
+        document.getElementById('here').addEventListener('swipe-left', function () {
+            console.log('swipe-left triggered');
+        });
+    </script>
+</body>
+</html>
