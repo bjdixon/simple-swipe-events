@@ -16,7 +16,7 @@ var simpleSwipeEvents = (function (element) {
             touchstart: function (e) {
                 startingX = e.touches[0].pageX;
                 startingY = e.touches[0].pageY;
-                customEvent(e, 'initial-touch');
+                eventFactory(e, 'initial-touch');
             },
             touchmove: function (e) {
                 noMovement = false;
@@ -24,7 +24,7 @@ var simpleSwipeEvents = (function (element) {
                 endingY = e.touches[0].pageY;
             },
             touchend: function (e) {
-                customEvent(e, determineEvent());
+                eventFactory(e, getEventType());
             },
             touchcancel: function (e) {
                 noMovement = false;
@@ -39,7 +39,7 @@ var simpleSwipeEvents = (function (element) {
                 buttonDown = true;
                 startingX = e.x;
                 startingY = e.y;
-                customEvent(e, 'initial-touch');
+                eventFactory(e, 'initial-touch');
             },
             mousemove: function (e) {
                 //only do stuff if the button is down
@@ -55,7 +55,7 @@ var simpleSwipeEvents = (function (element) {
                     return;
                 }
                 buttonDown = false;
-                customEvent(e, determineEvent());
+                eventFactory(e, getEventType());
             }
         }
     };
@@ -71,7 +71,7 @@ var simpleSwipeEvents = (function (element) {
         minimumMovement = typeof distance === "number" ? distance : minimumMovement;
     }
     
-    function customEvent(e, eventName) { // rename to eventFactory
+    function eventFactory(e, eventName) {
         var event = new CustomEvent(eventName, {
             detail: e.target,
             bubble: true
@@ -92,7 +92,7 @@ var simpleSwipeEvents = (function (element) {
         previousBaseElement = baseElement;
     }
 
-    function determineEvent() {
+    function getEventType() {
         if (noMovement) {
             return;
         } else {
