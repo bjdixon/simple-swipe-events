@@ -16,32 +16,30 @@ var simpleSwipeEvents = (function (element) {
             touchstart: function (e) {
                 startingX = e.touches[0].pageX;
                 startingY = e.touches[0].pageY;
-                return customEvent(e, 'initial-touch'); // can remove return and just call customEvent
+                customEvent(e, 'initial-touch');
             },
             touchmove: function (e) {
                 noMovement = false;
                 endingX = e.touches[0].pageX;
                 endingY = e.touches[0].pageY;
-                return 1; // can remove this statement
             },
             touchend: function (e) {
-                return customEvent(e, determineEvent()); // can remove return and just call customEvent
+                customEvent(e, determineEvent());
             },
             touchcancel: function (e) {
                 noMovement = false;
-                return 1; // can remove this statement
             }
         },
         mouse: {
             mousedown: function (e) {
                 //skip if this isn't button 0 (left mouse button)
                 if (e.button) {
-                    return e.button; // can just return;
+                    return;
                 }
                 buttonDown = true;
                 startingX = e.x;
                 startingY = e.y;
-                return customEvent(e, 'initial-touch'); // can remove return and just call customEvent
+                customEvent(e, 'initial-touch');
             },
             mousemove: function (e) {
                 //only do stuff if the button is down
@@ -49,16 +47,15 @@ var simpleSwipeEvents = (function (element) {
                     noMovement = false;
                     endingX = e.x;
                     endingY = e.y;
-                    return 1; // can remove this statement
                 }
             },
             mouseup: function (e) {
                 //skip if this isn't the left button
                 if (e.button) {
-                    return e.button; // can just return;
+                    return;
                 }
                 buttonDown = false;
-                return customEvent(e, determineEvent()); // can remove return and just call customEvent
+                customEvent(e, determineEvent());
             }
         }
     };
@@ -80,8 +77,6 @@ var simpleSwipeEvents = (function (element) {
             bubble: true
         });
         e.target.dispatchEvent(event);
-        event = null; // can probably remove this
-        return 1; // can probably remove this
     }
     
     function handleListeners(baseElement) {
@@ -99,7 +94,7 @@ var simpleSwipeEvents = (function (element) {
 
     function determineEvent() {
         if (noMovement) {
-            return 'fast-click'; // can just return;
+            return;
         } else {
             xMovement = endingX - startingX;
             yMovement = endingY - startingY;
