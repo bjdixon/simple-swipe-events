@@ -1,11 +1,13 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         jshint: {
-            files: ['src/js/*'],
+            files: ['src/*'],
             options: {
                 strict: true,
                 enforceall: true,
-                camelcase: false
+                camelcase: false,
+                eqnull: true,
+                browser: true
             }
         },
         watch: {

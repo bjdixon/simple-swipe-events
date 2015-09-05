@@ -1,5 +1,6 @@
 var simpleSwipeEvents = (function (element) {
-    var gestureInput = ('ontouchstart' in window) ? 'touch' : 'mouse',
+    'use strict';
+    var gestureInput = 'ontouchstart' in window ? 'touch' : 'mouse',
     baseElement = element || document,
     noMovement = true,
     buttonDown = false,
@@ -65,7 +66,7 @@ var simpleSwipeEvents = (function (element) {
     return {
         setMinimumMovement: setMinimumMovement,
         setBaseElement: handleListeners
-    }
+    };
     
     function setMinimumMovement(distance) {
         minimumMovement = typeof distance === "number" ? distance : minimumMovement;
@@ -84,10 +85,12 @@ var simpleSwipeEvents = (function (element) {
             return;
         }
         for (var event in events[gestureInput]) {
-            if (previousBaseElement) {
-                previousBaseElement.removeEventListener(event, events[gestureInput][event], false);
+            if (events[gestureInput].hasOwnProperty(event)) {
+                if (previousBaseElement) {
+                    previousBaseElement.removeEventListener(event, events[gestureInput][event], false);
+                }
+                baseElement.addEventListener(event, events[gestureInput][event], false);
             }
-            baseElement.addEventListener(event, events[gestureInput][event], false);
         }
         previousBaseElement = baseElement;
     }
