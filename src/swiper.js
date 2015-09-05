@@ -106,20 +106,16 @@ var simpleSwipeEvents = (function (element) {
                 if (Math.abs(xMovement) > Math.abs(yMovement)) {
                     if (xMovement < 0) {
                         return 'swipe-left';
-                    } else {
-                        return 'swipe-right'; // can return without else
                     }
-                } else {
-                    if (yMovement < 0) {
-                        return 'swipe-up';
-                    } else {
-                        return 'swipe-down'; // can return without else
-                    }
+                    return 'swipe-right';
                 }
-            } else {
-                // didn't move more than the minimum movement we care about so this was just a click
-                return 'fast-click';  // can return without else and just return;
+                if (yMovement < 0) {
+                    return 'swipe-up';
+                }
+                return 'swipe-down';
             }
+            // didn't move more than the minimum movement we care about so this was just a click
+            return 'fast-click';  // can return without else and just return;
         }
     }
 }());
