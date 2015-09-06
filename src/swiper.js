@@ -1,65 +1,65 @@
 var simpleSwipeEvents = (function (element) {
     'use strict';
     var gestureInput = 'ontouchstart' in window ? 'touch' : 'mouse',
-    baseElement = element || document,
-    noMovement = true,
-    buttonDown = false,
-    startingX,
-    startingY,
-    endingX,
-    endingY,
-    xMovement,
-    yMovement,
-    minimumMovement = 30,
-    previousBaseElement,
-    events = {
-        touch: {
-            touchstart: function (e) {
-                startingX = e.touches[0].pageX;
-                startingY = e.touches[0].pageY;
-                eventFactory(e, 'initial-touch');
-            },
-            touchmove: function (e) {
-                noMovement = false;
-                endingX = e.touches[0].pageX;
-                endingY = e.touches[0].pageY;
-            },
-            touchend: function (e) {
-                eventFactory(e, getEventType());
-            },
-            touchcancel: function (e) {
-                noMovement = false;
-            }
-        },
-        mouse: {
-            mousedown: function (e) {
-                //skip if this isn't button 0 (left mouse button)
-                if (e.button) {
-                    return;
-                }
-                buttonDown = true;
-                startingX = e.x;
-                startingY = e.y;
-                eventFactory(e, 'initial-touch');
-            },
-            mousemove: function (e) {
-                //only do stuff if the button is down
-                if (buttonDown) {
+        baseElement = element || document,
+        noMovement = true,
+        buttonDown = false,
+        startingX,
+        startingY,
+        endingX,
+        endingY,
+        xMovement,
+        yMovement,
+        minimumMovement = 30,
+        previousBaseElement,
+        events = {
+            touch: {
+                touchstart: function (e) {
+                    startingX = e.touches[0].pageX;
+                    startingY = e.touches[0].pageY;
+                    eventFactory(e, 'initial-touch');
+                },
+                touchmove: function (e) {
                     noMovement = false;
-                    endingX = e.x;
-                    endingY = e.y;
+                    endingX = e.touches[0].pageX;
+                    endingY = e.touches[0].pageY;
+                },
+                touchend: function (e) {
+                    eventFactory(e, getEventType());
+                },
+                touchcancel: function (e) {
+                    noMovement = false;
                 }
             },
-            mouseup: function (e) {
-                //skip if this isn't the left button
-                if (e.button) {
-                    return;
+            mouse: {
+                mousedown: function (e) {
+                    //skip if this isn't button 0 (left mouse button)
+                    if (e.button) {
+                        return;
+                    }
+                    buttonDown = true;
+                    startingX = e.x;
+                    startingY = e.y;
+                    eventFactory(e, 'initial-touch');
+                },
+                mousemove: function (e) {
+                    //only do stuff if the button is down
+                    if (buttonDown) {
+                        noMovement = false;
+                        endingX = e.x;
+                        endingY = e.y;
+                    }
+                },
+                mouseup: function (e) {
+                    //skip if this isn't the left button
+                    if (e.button) {
+                        return;
+                    }
+                    buttonDown = false;
+                    eventFactory(e, getEventType());
                 }
-                buttonDown = false;
-                eventFactory(e, getEventType());
             }
-        }
-    };
+        };
 
     handleListeners(baseElement);
     

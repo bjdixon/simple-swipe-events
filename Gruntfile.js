@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         },
         watch: {
             files: ['<%= jshint.files %>'],
-            tasks: ['jshint']
+            tasks: ['jshint', 'uglify']
         },
         uglify: {
             options: {
@@ -33,6 +33,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['jshint', 'uglify']);
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('min', ['uglify']);
+    grunt.registerTask('session', ['watch']);
 
 };
 
