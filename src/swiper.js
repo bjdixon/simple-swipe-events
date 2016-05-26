@@ -122,3 +122,7 @@ var simpleSwipeEvents = (function (element) {
   }
 }());
 
+if (typeof module !== 'undefined') {
+  module.exports = simpleSwipeEvents;
+}
+

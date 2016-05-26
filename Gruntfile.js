@@ -7,7 +7,8 @@ module.exports = function(grunt) {
                 enforceall: true,
                 camelcase: false,
                 eqnull: true,
-                browser: true
+                browser: true,
+                node: true
             }
         },
         watch: {
