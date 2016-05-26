@@ -9,16 +9,29 @@ Detects and dispatches swipe events. The minified script is 1kB.
 
 ##Usage
 
-###2 methods to import the library
+###Importing the library
+
+There are 2 methods to import the library:
 
 **1. Include the script on your page**
 ```html
 <script src="swiper.min.js"></script>
 ```
 **2. Use with Browserify**
+
+Install
+
+```sh
+npm install --save simple-swipe-events
+```
+
+and require
+
 ```js
 const simpleSwipeEvents = require('simple-swipe-events');
 ```
+
+[More information about Browserify](http://browserify.org/)
 
 ###Options
 
