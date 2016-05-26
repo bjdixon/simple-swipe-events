@@ -69,7 +69,7 @@ var simpleSwipeEvents = (function (element) {
   };
 
   function setMinimumMovement(distance) {
-    minimumMovement = typeof distance === "number" ? distance : minimumMovement;
+    minimumMovement = typeof distance === 'number' ? distance : minimumMovement;
   }
 
   function eventFactory(e, eventName) {
@@ -81,7 +81,7 @@ var simpleSwipeEvents = (function (element) {
   }
 
   function handleListeners(baseElement) {
-    if (baseElement == null) {
+    if (!baseElement || !baseElement.nodeName) {
       return;
     }
     for (var event in events[gestureInput]) {
@@ -118,7 +118,7 @@ var simpleSwipeEvents = (function (element) {
       return 'swipe-down';
     }
     // didn't move more than the minimum movement we care about so this was just a click
-    return 'fast-click';  // can return without else and just return;
+    return 'fast-click';
   }
 }());
 

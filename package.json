@@ -1,6 +1,6 @@
 {
   "name": "simple-swipe-events",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "handle simple swipe gesture events",
   "main": "src/swiper.js",
   "author": "Brian Dixon (bjdixon)",
